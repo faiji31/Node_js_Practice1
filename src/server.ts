@@ -8,11 +8,17 @@ const server : Server = createServer((req : IncomingMessage,res)=>{
     const method = req.method
 
     if(url === "/" && method === "GET"){
-       res.writeHead(200,{"content-type":"text/plain"})
-       res.end("This is The Route Server!")
-    }else{
-        res.writeHead(404,{"content-type":"text/plain"})
-        res.end("Route not found")
+       res.writeHead(200,{"content-type":"application/json"})
+       res.end(JSON.stringify({"message": "This is The Route Server!"}))
+    } else if(url?.startsWith("/products")){
+         res.writeHead(200,{"content-type":"application/json"})
+       res.end(JSON.stringify({"message": "This is Products route!"}))
+
+    }
+    else{
+        res.writeHead(404,{"content-type":"application/json"})
+        
+        res.end(JSON.stringify({"message":"Route not found!"}))
     }
 })
 
