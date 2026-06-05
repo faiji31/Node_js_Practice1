@@ -51,6 +51,29 @@ const url = req.url
        res.end(JSON.stringify({"message": "Products created Succesfully!",
          data:{newproduct}
         }))
-    }
+    } else if(method === "PUT" && id !== null){
+        const body = await parseBody(req)
+        const products = readProduct()
+
+       
+
+        const index = products.findIndex((p : Iproduct)=> p.id === id)
+        if(index <0){
+            res.writeHead(404,{"content-type":"application/json"})
+       res.end(JSON.stringify({"message": "Products not found!",
+         data:null
+        })) 
+            
+        } 
+        products[index] = {id : products[index].id,...body
+
+            
+        }
+         insertproduct(products)
+         res.writeHead(200,{"content-type":"application/json"})
+       res.end(JSON.stringify({"message": "Products Updated Succesfully!",
+         data:products[index]
+        })) 
+    } 
 
 }
