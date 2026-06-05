@@ -5,24 +5,9 @@
         "price:": 215
     },
     {
-        "id": 2,
-        "name": "Banana",
-        "price": 80
-    },
-    {
         "id": 3,
         "name": "goat-1",
         "price:": 21005
-    },
-    {
-        "id": 4,
-        "name": "Mango",
-        "price": 250
-    },
-    {
-        "id": 5,
-        "name": "Pineapple",
-        "price": 180
     },
     {
         "id": 6,
@@ -38,11 +23,6 @@
         "id": 8,
         "name": "Strawberry",
         "price": 450
-    },
-    {
-        "id": 9,
-        "name": "Papaya",
-        "price": 120
     },
     {
         "id": 10,
