@@ -1,14 +1,15 @@
-import type { IncomingMessage } from "http"
+import type { ServerResponse } from "http"
 
-export const ServerResponse=(res:IncomingMessage, success:boolean , message: String , data?: any)=>{
+export const SendResponse=(res:ServerResponse, success:boolean, message: string, statusCode:number, data?: any)=>{
    
     const Response ={
-        success: success,
-        message: message,
-        data : data,
+        success,
+        message,
+        data,
+       
 
     }
 
-    res.writeHead(200,{"content-type":"application/json"})
-       res.end(JSON.stringify({"message": "Product retrive Succesfully!", data:{products}}))
+   res.writeHead(statusCode,{"content-type":"application/json"})
+       res.end(JSON.stringify(Response))
 }

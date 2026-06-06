@@ -2,6 +2,7 @@ import type { IncomingMessage, ServerResponse } from "http";
 import { insertproduct, readProduct } from "../service/product.service";
 import type { Iproduct } from "../types/product.types";
 import { parseBody } from "../utility/parseBody";
+import { SendResponse } from "../utility/sendResponse";
 
 export const productController =async(req:IncomingMessage,res:ServerResponse)=>{
 
@@ -24,9 +25,13 @@ const url = req.url
         //         name:"Apple"
         //     }
         // ]
-       const products = readProduct()
-        res.writeHead(200,{"content-type":"application/json"})
-       res.end(JSON.stringify({"message": "Product retrive Succesfully!", data:{products}}))
+       try {
+              const products = readProduct()
+       return SendResponse(res,true,"products retrive Successfully",200,products)
+       } catch(error){
+          const products = readProduct()
+        SendResponse(res,false,"Failed!",500,error)
+       }
     } else if(method === "GET" && id!== null){
         const products = readProduct()
         const product = products.find((p : Iproduct) => p.id === id)
